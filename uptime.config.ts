@@ -68,7 +68,7 @@ const workerConfig: WorkerConfig = {
       id: 'nn',
       name: 'N8n Server',
       method: 'GET',
-      target: 'https://ambitionsight-n8n.hf.space'
+      target: 'https://ambitionsight-n8n.hf.space',
       tooltip: 'My production server SSH',
       statusPageLink: 'https://example.com',
       timeout: 5000,
