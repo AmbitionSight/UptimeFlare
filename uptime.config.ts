@@ -1,86 +1,45 @@
-import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
-
-const pageConfig: PageConfig = {
+const pageConfig = {
   // Title for your status page
-  title: "lyc8503's Status Page",
+  title: "hxd Status Page",
   // Links shown at the header of your status page, could set `highlight` to `true`
   links: [
-    { link: 'https://github.com/AmbitionSight', label: 'GitHub' },
-    { link: 'https://blog.lyc8503.net/', label: 'Blog' },
-    { link: 'mailto:me@lyc8503.net', label: 'Email Me', highlight: true },
+    { link: 'https://vwo50.club', label: 'Blog' },
+    { link: 'https://u1s1.one', label: 'Nav Site' },
+    { link: 'https://md.u1s1.one/', label: 'markdown', highlight: true },
   ],
-  // [OPTIONAL] Group your monitors
-  // If not specified, all monitors will be shown in a single list
-  // If specified, monitors will be grouped and ordered, not-listed monitors will be invisble (but still monitored)
-  group: {
-    '🌐 Public (example group name)': ['foo_monitor', 'bar_monitor', 'more monitor ids...'],
-    '🔐 Private': ['test_tcp_monitor'],
-  },
 }
 
-const workerConfig: WorkerConfig = {
-  // Write KV at most every 3 minutes unless the status changed
+const workerConfig = {
   kvWriteCooldownMinutes: 3,
-  // Enable HTTP Basic auth for status page & API by uncommenting the line below, format `<USERNAME>:<PASSWORD>`
-  // passwordProtection: 'username:password',
-  // Define all your monitors here
   monitors: [
     {
-      id: 'foo_monitor_1',
-      name: 'Carlos Life Book',
+      id: 'n8n',
+      name: 'n8n',
       method: 'GET',
-      target: 'ambitionsight-n8n.hf.space',
-      tooltip: 'Carlos Life Book',
-      statusPageLink: 'ambitionsight-n8n.hf.space',
-      expectedCodes: [200],
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      target: 'https://ambitionsight-n8n.hf.space',
+        tooltip: 'This is a tooltip for this monitor',
     },
-    {  
-      id: 'foo_monitor_2',
-      name: 'RACE.TW',
+
+ {
+      id: 'google_monitor',
+      name: 'My Nav Monitor',
       method: 'GET',
-      target: 'https://race.tw',
-      tooltip: 'RACE.TW',
-      statusPageLink: 'https://race.tw',
-      expectedCodes: [200],
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+      target: 'https://u1s1.one',
+     tooltip: 'This is a tooltip for this monitor',
+  // [OPTIONAL] `statusPageLink` is ONLY used for clickable link at status page
+  statusPageLink: 'https://example.com',
     },
-    {  
-      id: 'foo_monitor_3',
-      name: 'GHOST.TW',
-      method: 'GET',
-      target: 'https://ghost.tw',
-      tooltip: 'GHOST.TW',
-      statusPageLink: 'https://ghost.tw',
-      expectedCodes: [200],
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Uptimeflare',
-      },
+
+    {
+      id: 'ssh_monitor',
+      name: 'Oracle Monitor',
+      method: 'TCP_PING',
+      target: 'X.X.X.X:22',
+        tooltip: 'This is a tooltip for this monitor',
+  // [OPTIONAL] `statusPageLink` is ONLY used for clickable link at status page
+  statusPageLink: 'https://example.com',
     },
   ],
-  notification: {
-    // [Optional] apprise API server URL
-    // if not specified, no notification will be sent
-    appriseApiServer: 'https://apprise.example.com/notify',
-    // [Optional] recipient URL for apprise, refer to https://github.com/caronc/apprise
-    // if not specified, no notification will be sent
-    recipientUrl: 'tgram://bottoken/ChatID',
-    // [Optional] timezone used in notification messages, default to "Etc/GMT"
-    timeZone: 'Asia/Shanghai',
-    // [Optional] grace period in minutes before sending a notification
-    // notification will be sent only if the monitor is down for N continuous checks after the initial failure
-    // if not specified, notification will be sent immediately
-    gracePeriod: 5,
-    // [Optional] disable notification for monitors with specified ids
-    skipNotificationIds: ['foo_monitor', 'bar_monitor'],
-  },
   callbacks: {
     onStatusChange: async (
       env: any,
@@ -88,10 +47,11 @@ const workerConfig: WorkerConfig = {
       isUp: boolean,
       timeIncidentStart: number,
       timeNow: number,
-      reason: string
+      reason: string,
     ) => {
       // This callback will be called when there's a status change for any monitor
       // Write any Typescript code here
+
       // This will not follow the grace period settings and will be called immediately when the status changes
       // You need to handle the grace period manually if you want to implement it
     },
@@ -100,7 +60,7 @@ const workerConfig: WorkerConfig = {
       monitor: any,
       timeIncidentStart: number,
       timeNow: number,
-      reason: string
+      reason: string,
     ) => {
       // This callback will be called EVERY 1 MINTUE if there's an on-going incident for any monitor
       // Write any Typescript code here
@@ -108,28 +68,5 @@ const workerConfig: WorkerConfig = {
   },
 }
 
-// You can define multiple maintenances here
-// During maintenance, an alert will be shown at status page
-// Also, related downtime notifications will be skipped (if any)
-// Of course, you can leave it empty if you don't need this feature
-// const maintenances: MaintenanceConfig[] = []
-const maintenances: MaintenanceConfig[] = [
-  {
-    // [Optional] Monitor IDs to be affected by this maintenance
-    monitors: ['foo_monitor', 'bar_monitor'],
-    // [Optional] default to "Scheduled Maintenance" if not specified
-    title: 'Test Maintenance',
-    // Description of the maintenance, will be shown at status page
-    body: 'This is a test maintenance, server software upgrade',
-    // Start time of the maintenance, in UNIX timestamp or ISO 8601 format
-    start: '2025-04-27T00:00:00+08:00',
-    // [Optional] end time of the maintenance, in UNIX timestamp or ISO 8601 format
-    // if not specified, the maintenance will be considered as on-going
-    end: '2025-04-30T00:00:00+08:00',
-    // [Optional] color of the maintenance alert at status page, default to "yellow"
-    color: 'blue',
-  },
-]
-
 // Don't forget this, otherwise compilation fails.
-export { pageConfig, workerConfig, maintenances }
+export { pageConfig, workerConfig }
