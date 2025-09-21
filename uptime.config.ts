@@ -65,10 +65,13 @@ const workerConfig: WorkerConfig = {
     },
     // Example TCP Monitor
     {
-      id: 'n8n',
+      id: 'nn',
       name: 'N8n Server',
       method: 'GET',
       target: 'https://ambitionsight-n8n.hf.space'
+      tooltip: 'My production server SSH',
+      statusPageLink: 'https://example.com',
+      timeout: 5000,
     },
   ],
   notification: {
