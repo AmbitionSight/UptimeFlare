@@ -9,6 +9,9 @@ const pageConfig: PageConfig = {
     { link: 'https://blog.lyc8503.net/', label: 'Blog' },
     { link: 'mailto:me@lyc8503.net', label: 'Email Me', highlight: true },
   ],
+  group: {
+    '🔐 Private': ['n8n'],
+  },
 }
 
 const workerConfig: WorkerConfig = {
@@ -20,7 +23,7 @@ const workerConfig: WorkerConfig = {
   monitors: [
     // Example TCP Monitor
     {
-      id: 'test_tcp_monitor',
+      id: 'n8n',
       name: 'N8n Server',
       method: 'GET',
       // `target` should be `host:port` for tcp monitors
