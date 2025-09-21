@@ -10,7 +10,7 @@ const pageConfig: PageConfig = {
     { link: 'mailto:me@lyc8503.net', label: 'Email Me', highlight: true },
   ],
   group: {
-    '🔐 Private': ['n8n'],
+    '🔐 Private': ['test_tcp_monitor'],
   },
 }
 
@@ -21,12 +21,10 @@ const workerConfig: WorkerConfig = {
   // passwordProtection: 'username:password',
   // Define all your monitors here
   monitors: [
-    // Example TCP Monitor
     {
-      id: 'n8n',
+      id: 'test_tcp_monitor',
       name: 'N8n Server',
       method: 'GET',
-      // `target` should be `host:port` for tcp monitors
       target: 'https://ambitionsight-n8n.hf.space',
       timeout: 5000,
     },
