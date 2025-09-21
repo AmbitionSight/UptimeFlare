@@ -67,11 +67,9 @@ const workerConfig: WorkerConfig = {
     {
       id: 'test_tcp_monitor',
       name: 'N8n Server',
-      method: 'TCP_PING',
+      method: 'GET',
       // `target` should be `host:port` for tcp monitors
-      target: 'ambitionsight-n8n.hf.space:443',
-      tooltip: 'My production server SSH',
-      statusPageLink: 'https://example.com',
+      target: 'https://ambitionsight-n8n.hf.space',
       timeout: 5000,
     },
   ],
