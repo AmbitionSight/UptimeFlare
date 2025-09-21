@@ -17,7 +17,8 @@ const workerConfig = {
       name: 'n8n',
       method: 'GET',
       target: 'https://ambitionsight-n8n.hf.space',
-        tooltip: 'This is a tooltip for this monitor',
+      tooltip: 'This is a tooltip for this monitor',
+      statusPageLink: 'https://example.com',
     },
 
  {
