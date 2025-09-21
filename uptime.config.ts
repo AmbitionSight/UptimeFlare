@@ -65,7 +65,7 @@ const workerConfig: WorkerConfig = {
     },
     // Example TCP Monitor
     {
-      id: 'nn',
+      id: 'test_tcp_monitor',
       name: 'N8n Server',
       method: 'TCP_PING',
       // `target` should be `host:port` for tcp monitors
