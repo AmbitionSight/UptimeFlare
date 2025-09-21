@@ -23,12 +23,16 @@ const workerConfig: WorkerConfig = {
   passwordProtection: 'username:password',
   monitors: [
     {
-      id: 'n8n',
-      name: 'N8n Server',
-      method: 'GET',
-      target: 'https://ambitionsight-n8n.hf.space'
-    }
-    // You can continue to define more monitors here...
+  id: 'n8n',
+  name: 'N8n Server',
+  method: 'GET',
+  target: 'https://ambitionsight-n8n.hf.space',
+  tooltip: 'This is a tooltip for this monitor',
+  statusPageLink: 'https://ambitionsight-n8n.hf.space',
+  hideLatencyChart: false,
+  expectedCodes: [200],
+  responseKeyword: 'success',
+    },
   ],
   notification: {
     //...
