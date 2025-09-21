@@ -19,62 +19,22 @@ const pageConfig: PageConfig = {
 }
 
 const workerConfig: WorkerConfig = {
-  // Write KV at most every 3 minutes unless the status changed
   kvWriteCooldownMinutes: 3,
-  // Enable HTTP Basic auth for status page & API by uncommenting the line below, format `<USERNAME>:<PASSWORD>`
-  // passwordProtection: 'username:password',
-  // Define all your monitors here
+  passwordProtection: 'username:password',
   monitors: [
-  {
+    {
       id: 'n8n',
       name: 'N8n Server',
       method: 'GET',
-      target: 'https://ambitionsight-n8n.hf.space',
-        tooltip: 'This is a tooltip for this monitor',
-  // [OPTIONAL] `statusPageLink` is ONLY used for clickable link at status page
-  statusPageLink: 'https://example.com',
-  },
+      target: 'https://ambitionsight-n8n.hf.space'
+    }
+    // You can continue to define more monitors here...
   ],
   notification: {
-    // [Optional] apprise API server URL
-    // if not specified, no notification will be sent
-    appriseApiServer: 'https://apprise.example.com/notify',
-    // [Optional] recipient URL for apprise, refer to https://github.com/caronc/apprise
-    // if not specified, no notification will be sent
-    recipientUrl: 'tgram://bottoken/ChatID',
-    // [Optional] timezone used in notification messages, default to "Etc/GMT"
-    timeZone: 'Asia/Shanghai',
-    // [Optional] grace period in minutes before sending a notification
-    // notification will be sent only if the monitor is down for N continuous checks after the initial failure
-    // if not specified, notification will be sent immediately
-    gracePeriod: 5,
-    // [Optional] disable notification for monitors with specified ids
-    skipNotificationIds: ['foo_monitor', 'bar_monitor'],
+    //...
   },
   callbacks: {
-    onStatusChange: async (
-      env: any,
-      monitor: any,
-      isUp: boolean,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {
-      // This callback will be called when there's a status change for any monitor
-      // Write any Typescript code here
-      // This will not follow the grace period settings and will be called immediately when the status changes
-      // You need to handle the grace period manually if you want to implement it
-    },
-    onIncident: async (
-      env: any,
-      monitor: any,
-      timeIncidentStart: number,
-      timeNow: number,
-      reason: string
-    ) => {
-      // This callback will be called EVERY 1 MINTUE if there's an on-going incident for any monitor
-      // Write any Typescript code here
-    },
+    //...
   },
 }
 
